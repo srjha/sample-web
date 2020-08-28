@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-ENV JAR_FILE=target/*.jar
+ENV JAR_FILE target/*.jar
 
 WORKDIR /opt/app
 
