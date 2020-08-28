@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sr.sample.web</groupId>
 	<artifactId>sample-web</artifactId>
@@ -47,6 +48,47 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
+
+			<plugin>
+				<groupId>com.github.sylvainlaurent.maven</groupId>
+				<artifactId>yaml-json-validator-maven-plugin</artifactId>
+				<version>1.0.4</version>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+						<configuration>
+							<validationSets>
+								<validationSet>
+									<jsonSchema>az-devops-pipeline-schema.json</jsonSchema>
+									<includes>
+										<include>azure-pipelines.yml</include>
+									</includes>
+									<excludes>
+										<exclude>src/**/*</exclude>
+										<exclude>az-devops-pipeline-schema.json</exclude>
+									</excludes>
+								</validationSet>
+							</validationSets>
+							<!-- Duplicate keys detection is turned on by default. -->
+							<detectDuplicateKeys>false</detectDuplicateKeys>
+							<allowEmptyFiles>false</allowEmptyFiles>
+							<!-- Allow comments in json files is turned off by default -->
+							<allowJsonComments>true</allowJsonComments>
+							<!-- Trailing commas are not allwed by default -->
+							<allowTrailingComma>true</allowTrailingComma>
+							<skip>false</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
