@@ -26,7 +26,7 @@ stages:
         mavenPomFile: 'pom.xml'
         goals: 'clean install'
         publishJUnitResults: false
-       javaHomeOption: 'JDKVersion'
+        javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.11'
         mavenVersionOption: 'Default'
         mavenAuthenticateFeed: false
