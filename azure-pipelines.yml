@@ -12,6 +12,19 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
+- stage: validate
+  displayName: validate
+  jobs:
+  - job: validateYaml
+    displayName: validate yaml
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps: 
+    - task: PythonScript@0
+      inputs:
+        scriptSource: 'inline'
+        script: 'python -c ''import yaml, sys; yaml.safe_load(sys.stdin)'' < azure-pipelines.yml'
+        failOnStderr: true
 - stage: Build
   displayName: Build image
   jobs:  
