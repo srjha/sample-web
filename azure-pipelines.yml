@@ -23,7 +23,7 @@ stages:
     - task: PythonScript@0
       inputs:
         scriptSource: 'inline'
-        script: 'python -c ''import yaml, sys; yaml.safe_load(sys.stdin)'' < azure-pipelines.yml'
+        script: '''import yaml, sys; yaml.safe_load(sys.stdin)'' < azure-pipelines.yml'
         failOnStderr: true
 - stage: Build
   displayName: Build image
