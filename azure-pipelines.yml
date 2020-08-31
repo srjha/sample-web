@@ -20,13 +20,12 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps: 
-    - task: PythonScript@0
+    - task: Bash@3
       inputs:
-        scriptSource: 'inline'
+        targetType: 'inline'
         script: |
-          import yaml, sys;
-          yaml.safe_load(sys.stdin) < azure-pipelines.yml
-        failOnStderr: true
+          python -v
+          pip -v
 - stage: Build
   displayName: Build image
   jobs:  
