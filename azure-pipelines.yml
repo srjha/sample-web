@@ -23,9 +23,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: |
-          python -v
-          pip -v
+        script: 'echo WIP'
 - stage: Build
   displayName: Build image
   jobs:  
