@@ -27,6 +27,7 @@ variables:
 
 stages:
 - stage: validate
+  condition: eq(variables.isDev, true)
   displayName: validate
   jobs:
   - job: validateYaml
@@ -40,6 +41,7 @@ stages:
         script: echo isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
 - stage: Build
   displayName: Build image
+  condition: or(eq(variables.isProd, true), eq(variables.isTest, true))
   jobs:  
   - job: Build
     displayName: Build
@@ -60,7 +62,8 @@ stages:
         sonarQubeRunAnalysis: false
     
     - task: Docker@2
-      displayName: Build an image
+      condition: eq(variables.isProd, true)
+      displayName: Build an image - only for prod
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
