@@ -19,9 +19,9 @@ resources:
 - repo: self
 
 variables:
-  isDev: $[eq(parameters.environ, 'dev')]
-  isTest: $[eq(parameters.environ, 'test')]
-  isUat: $[eq(parameters.environ, 'test')]
+  isDev: ${{eq(parameters.environ, 'dev')}}
+  isTest: ${{eq(parameters.environ, 'test')}}
+  isUat: ${{eq(parameters.environ, 'test')}}
   isProd: false
   tag: '$(Build.BuildId)'
 
