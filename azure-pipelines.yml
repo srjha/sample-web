@@ -14,16 +14,24 @@ parameters:
     - dev
     - test
     - uat
+    - prod
 
 resources:
 - repo: self
 
 variables:
-  isDev: ${{eq(parameters.environ, 'dev')}}
-  isTest: ${{eq(parameters.environ, 'test')}}
-  isUat: ${{eq(parameters.environ, 'test')}}
-  isProd: false
-  tag: '$(Build.BuildId)'
+# All the below code will be based on these flags. The condition for flag can be changed in one place here
+# Example: Say, tomorrow we want to determine dev by branch name etc.
+- name: isDev
+  value: ${{eq(parameters.environ, 'dev')}}
+- name: isTest
+  value: ${{eq(parameters.environ, 'test')}}
+- name: isUat
+  value: ${{eq(parameters.environ, 'test')}}
+- name: isProd
+  value: ${{eq(parameters.environ, 'prod')}}
+- name: tag
+  value: '$(Build.BuildId)'
 
 stages:
 - stage: validate
