@@ -7,10 +7,7 @@ trigger:
 
 parameters:
   - name: coll
-    type: deploymentList
-    values:
-      - dev
-      - test
+    type: jobList
   - name: environ
     displayName: Environment
     type: string
