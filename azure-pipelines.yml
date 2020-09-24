@@ -9,16 +9,10 @@ parameters:
     type: object
     displayName: envs-map
     default:
-      foo: FOO
-      bar: BAR
-      things:
-      - one
-      - two
-      - three
-      nested:
-        one: apple
-        two: pear
-        count: 3
+      envs:
+      - one: dev
+      - two: test
+      - three: uat
   - name: environ
     displayName: Environment
     type: string
