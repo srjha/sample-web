@@ -6,6 +6,11 @@ trigger:
 - multi-env-pipeline
 
 parameters:
+  - name: coll
+    type: deploymentList
+    values:
+      - dev
+      - test
   - name: environ
     displayName: Environment
     type: string
