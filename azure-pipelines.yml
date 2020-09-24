@@ -5,14 +5,6 @@
 trigger:
 - multi-env-pipeline
 parameters:
-  - name: coll
-    type: object
-    displayName: envs-map
-    default:
-      envs:
-      - one: dev
-      - two: test
-      - three: uat
   - name: environ
     displayName: Environment
     type: string
@@ -57,7 +49,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: echo coll=$(parameters.coll), env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
+        script: echo env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
 - stage: Build
   displayName: Build image
   condition: or(eq(variables.isProd, true), eq(variables.isTest, true))
