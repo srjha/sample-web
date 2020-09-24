@@ -57,7 +57,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: echo coll=$(parameters.coll.envs.one), env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
+        script: echo coll=$(parameters.coll), env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
 - stage: Build
   displayName: Build image
   condition: or(eq(variables.isProd, true), eq(variables.isTest, true))
