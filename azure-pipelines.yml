@@ -4,35 +4,41 @@
 
 trigger:
 - multi-env-pipeline
+name: buildp
 parameters:
-  - name: environ
-    displayName: Environment
-    type: string
-    default: dev
-    values:
-    - dev
-    - test
-    - uat
-    - prod
-  - name: env-dev
+  - name: dev
     displayName: DEV
     type: boolean
     default: false
+  - name: test
+    displayName: TEST
+    type: boolean
+    default: false
+  - name: uat
+    displayName: UAT
+    type: boolean
+    default: false
+  - name: prod
+    displayName: PROD
+    type: boolean
+    default: false
+  
 
 resources:
 - repo: self
+
 
 variables:
 # All the below code will be based on these flags. The condition for flag can be changed in one place here
 # Example: Say, tomorrow we want to determine dev by branch name etc.
 - name: isDev
-  value: ${{eq(parameters.environ, 'dev')}}
+  value: ${{eq(parameters.dev, true)}}
 - name: isTest
-  value: ${{eq(parameters.environ, 'test')}}
+  value: ${{eq(parameters.test, true)}}
 - name: isUat
-  value: ${{eq(parameters.environ, 'test')}}
+  value: ${{eq(parameters.uat, true)}}
 - name: isProd
-  value: ${{eq(parameters.environ, 'prod')}}
+  value: ${{eq(parameters.prod, true)}}
 - name: tag
   value: '$(Build.BuildId)'
 
@@ -49,7 +55,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: echo env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
+        script: echo isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
 - stage: Build
   displayName: Build image
   condition: or(eq(variables.isProd, true), eq(variables.isTest, true))
