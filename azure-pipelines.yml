@@ -36,6 +36,8 @@ variables:
   value: ${{eq(parameters.environ, 'prod')}}
 - name: tag
   value: '$(Build.BuildId)'
+- name: ENVIRONMENT
+  value: '$(environ)'
 
 stages:
 - stage: validate
