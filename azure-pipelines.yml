@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- re-trigger
 
 parameters:
   - name: environ
@@ -81,3 +81,9 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+- stage: ReTriggerIfApplicable
+  displayName: Retrigger
+  jobs:
+    - job: 
+      steps:
+      - template: re-trigger.yaml
