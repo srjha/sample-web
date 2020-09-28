@@ -2,7 +2,6 @@ steps:
 - script: |
     echo "Built"
     echo $ENVIRONMENT
-    echo $TOKEN
     if [[ $ENVIRONMENT == "dev" ]]
         then
             echo "triggering TEST after $ENVIRONMENT"
