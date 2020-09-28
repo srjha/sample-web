@@ -37,7 +37,7 @@ variables:
 - name: tag
   value: '$(Build.BuildId)'
 - name: ENVIRONMENT
-  value: '$(environ)'
+  value: '$(parameters.environ)'
 
 stages:
 - stage: validate
