@@ -1,0 +1,21 @@
+steps:
+- script: |
+    echo "Built"
+    echo $ENVIRONMENT
+    echo $TOKEN
+    if [[ $ENVIRONMENT == "dev" ]]
+        then
+            echo "triggering TEST after $ENVIRONMENT"
+            #curl https://www.google.com/search?q=$ENVIRONMENT
+            echo "triggering UAT after $ENVIRONMENT"
+            #curl https://www.google.com/search?q=$ENVIRONMENT
+        elif  [[ $ENVIRONMENT == "test" ]]
+            then
+                echo "triggering TEST"
+                #curl https://www.google.com/search?q=$ENVIRONMENT
+        elif  [[ $ENVIRONMENT == "uat" ]]
+            then
+                echo "triggering UAT"
+                #curl https://www.google.com/search?q=$ENVIRONMENT
+    fi
+  displayName: Trigger next if applicable
