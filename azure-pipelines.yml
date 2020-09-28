@@ -82,6 +82,7 @@ stages:
         tags: |
           $(tag)
 - stage: ReTriggerIfApplicable
+  condition: or(eq(variables.isDev, true), eq(variables.isTest, true))
   displayName: Retrigger
   jobs:
     - job: 
