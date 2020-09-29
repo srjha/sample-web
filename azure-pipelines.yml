@@ -34,6 +34,8 @@ variables:
   value: '$(Build.BuildId)'
 - name: ENVIRONMENT
   value: ${{ parameters.environ }}
+- name: devDepends
+  value: validate
 
 stages:
 - stage: validate
@@ -82,8 +84,7 @@ stages:
 - stage: ReTriggerIfApplicable
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
-  dependsOn:
-  - Build
+  dependsOn: $(env-dev).trim().Split(',')
   jobs:
     - job: 
       steps:
