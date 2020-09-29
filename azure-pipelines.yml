@@ -50,7 +50,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: echo env-dev=$(env-dev), isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
+        script: echo isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
 - stage: Build
   displayName: Build image
   condition: or(eq(variables.isProd, true), eq(variables.isTest, true))
@@ -84,7 +84,7 @@ stages:
 - stage: ReTriggerIfApplicable
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
-  dependsOn: $(variables.devDepends)
+  dependsOn: variables.devDepends
   jobs:
     - job: 
       steps:
