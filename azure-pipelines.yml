@@ -80,7 +80,7 @@ stages:
         tags: |
           $(tag)
 - stage: ReTriggerIfApplicable
-  condition: or(eq(variables.isDev, true), eq(variables.isTest, true))
+  condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
   dependsOn:
   - Build
