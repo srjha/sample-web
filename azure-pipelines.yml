@@ -39,8 +39,6 @@ stages:
 - stage: validate
   condition: eq(variables.isDev, true)
   displayName: validate
-  dependsOn:
-  - validate
   jobs:
   - job: validateYaml
     displayName: validate yaml
@@ -84,6 +82,8 @@ stages:
 - stage: ReTriggerIfApplicable
   condition: or(eq(variables.isDev, true), eq(variables.isTest, true))
   displayName: Retrigger
+  dependsOn:
+  - Build
   jobs:
     - job: 
       steps:
