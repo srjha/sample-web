@@ -84,7 +84,7 @@ stages:
 - stage: ReTriggerIfApplicable
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
-  dependsOn: $(env-dev).trim().Split(',')
+  dependsOn: $(variables.env-dev).Split(',')
   jobs:
     - job: 
       steps:
