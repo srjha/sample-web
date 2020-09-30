@@ -15,6 +15,9 @@ parameters:
     - test
     - uat
     - prod
+  - name: depends_on
+    type: object
+    default: [validate]
 
 resources:
 - repo: self
@@ -34,8 +37,7 @@ variables:
   value: '$(Build.BuildId)'
 - name: ENVIRONMENT
   value: ${{ parameters.environ }}
-- name: devDepends
-  value: 'validate,validate'
+
 
 stages:
 - stage: validate
@@ -84,7 +86,9 @@ stages:
 - stage: ReTriggerIfApplicable
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
-  dependsOn: ${{ split(variables.devDepends,',') }}
+  dependsOn:
+      - ${{ each stage in parameters.depends_on }}:
+        - ${{ stage }}
   jobs:
     - job: 
       steps:
