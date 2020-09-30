@@ -17,7 +17,7 @@ parameters:
     - prod
   - name: depends_on
     type: object
-    default: [validate]
+    default: [validate, Build]
 
 resources:
 - repo: self
