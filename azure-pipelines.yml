@@ -99,7 +99,7 @@ stages:
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
   dependsOn:
-      - ${{ each stage in parameters.depends_on.dev }}:
+      - ${{ each stage in parameters.depends_on[parameters.environ] }}:
         - ${{ stage }}
   jobs:
     - job: 
@@ -107,5 +107,5 @@ stages:
       - task: Bash@3
         inputs:
           targetType: 'inline'
-          script: echo dependencies = $(parameters.depends_on.dev)
+          script: echo dependencies = $(parameters.depends_on[parameters.environ])
       - template: re-trigger.yaml
