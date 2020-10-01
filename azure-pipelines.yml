@@ -104,8 +104,4 @@ stages:
   jobs:
     - job: 
       steps:
-      - task: Bash@3
-        inputs:
-          targetType: 'inline'
-          script: echo dependencies = $(parameters.depends_on[parameters.environ])
       - template: re-trigger.yaml
