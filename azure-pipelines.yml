@@ -19,10 +19,10 @@ parameters:
     type: object
     default:
       dev:
-        - validate
         - Build
       test:
-        - Build 
+        - Build
+        - validate
 
 resources:
 - repo: self
