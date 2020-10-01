@@ -59,7 +59,7 @@ stages:
       displayName: Print depends
       inputs:
         targetType: 'inline'
-        script: echo dependencies = ${{ parameters.depends_on.dev }}
+        script: echo dependencies = ${{join(' ', parameters.depends_on.dev) }}
     - task: Bash@3
       displayName: Print is flags
       inputs:
