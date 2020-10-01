@@ -51,6 +51,12 @@ stages:
       vmImage: 'ubuntu-latest'
     steps: 
     - task: Bash@3
+      displayName: Print depends
+      inputs:
+        targetType: 'inline'
+        script: echo dependencies = $(parameters.depends_on.dev)
+    - task: Bash@3
+      displayName: Print is flags
       inputs:
         targetType: 'inline'
         script: echo isDev = $(isDev), isTest = $(isTest), isUat=$(isUat), isProd=$(isProd)
