@@ -47,7 +47,6 @@ variables:
 stages:
 
 - stage: validate
-  condition: eq(variables.isDev, true)
   displayName: validate
   jobs:
   - job: validateYaml
