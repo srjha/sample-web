@@ -17,7 +17,7 @@ parameters:
     - prod
   - name: depends_on
     type: object
-    default: [validate, Build]
+    default: [dev:[validate, Build], test:[validate, Build]]
 
 resources:
 - repo: self
@@ -40,6 +40,7 @@ variables:
 
 
 stages:
+
 - stage: validate
   condition: eq(variables.isDev, true)
   displayName: validate
@@ -87,9 +88,13 @@ stages:
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
   dependsOn:
-      - ${{ each stage in parameters.depends_on }}:
+      - ${{ each stage in parameters.depends_on[parameters.environ] }}:
         - ${{ stage }}
   jobs:
     - job: 
       steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: echo dependencies = $(parameters.depends_on[parameters.environ])
       - template: re-trigger.yaml
