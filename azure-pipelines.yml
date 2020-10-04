@@ -98,8 +98,8 @@ stages:
   condition: and(succeeded(),or(eq(variables.isDev, true), eq(variables.isTest, true)))
   displayName: Retrigger
   dependsOn:
-      - ${{ each stage in parameters.depends_on[parameters.environ] }}:
-        - ${{ stage }}
+  - ${{ each stage in parameters.depends_on[parameters.environ] }}:
+    - ${{ stage }}
   jobs:
     - job: 
       steps:
