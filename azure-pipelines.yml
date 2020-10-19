@@ -49,6 +49,9 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps: 
+    - task: Npm@1
+      inputs:
+        command: 'install'
     - task: Bash@3
       inputs:
         targetType: 'inline'
