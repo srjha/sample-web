@@ -49,6 +49,13 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps: 
+    - task: CmdLine@2
+      inputs:
+        script: |
+          apt update
+          apt install nodejs
+          apt install npm
+          nodejs -v
     - task: Bash@3
       inputs:
         targetType: 'inline'
