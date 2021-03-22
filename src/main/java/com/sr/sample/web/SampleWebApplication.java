@@ -15,7 +15,7 @@ public class SampleWebApplication {
 
 	@GetMapping("/check")
 	public String home() {
-		return "OK, OK";
+		return "OK, OK2";
 	}
 
 }
